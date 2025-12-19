@@ -10,18 +10,18 @@ namespace PrimesInCSharp
     {
       Action<string> Display = Console.WriteLine;
       // time how long it takes to compute primes up to a certain number
-      int limit = 100_000_000;
+      const int limit = 10_000_000;
       // 10_000 1ms
       // 100_000 15ms
       // 1_000_000 377ms
-      // 10_000_000 9s 71ms
+      // 10_000_000 9s 71ms on laptop and 6s 360ms on desktop
       // 100_000_000 04m:32s:126ms
       Stopwatch chrono = new Stopwatch();
       chrono.Start();
       List<int> primes = GetPrimesUpTo(limit);
       chrono.Stop();
-      Console.WriteLine($"Prime numbers up to {limit}:");
-      Console.WriteLine(string.Join(", ", primes));
+      Display($"Prime numbers up to {limit}:");
+      //Console.WriteLine(string.Join(", ", primes));
       Display($"Time taken to compute primes up to {limit}: {ToDaysHoursMinutesSeconds(chrono.Elapsed)}");
 
       Display("Press any key to exit...");
