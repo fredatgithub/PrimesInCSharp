@@ -34,7 +34,8 @@ namespace PrimesInCSharp
       for (int num = 2; num <= limit; num++)
       {
         bool isPrime = true;
-        for (int i = 2; i <= Math.Sqrt(num); i++)
+        int squareRoot = (int)Math.Sqrt(num);
+        for (int i = 2; i <= squareRoot; i++)
         {
           if (num % i == 0)
           {
