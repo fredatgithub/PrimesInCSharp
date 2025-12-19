@@ -13,12 +13,14 @@ string ToDaysHoursMinutesSeconds(chrono::milliseconds duration);
 
 int main()
 {
-  const int limit = 100'000'000;
+  const int limit = 1'000'000'000;
   // 10_000 0ms too fast to measure
   // 100_000 15ms in C# and 7ms in C++
   // 1_000_000 377ms in C# and 165ms in C++
   // 10_000_000 9s 71ms on laptop and 6s 360ms on desktop in C# and 4s 153ms on Desktop in C++
   // 100_000_000 04m:32s:126ms in C# and 01m:45s:528ms in C++
+  // 1_000_000_000 47m:19s:642ms in C++ on desktop
+
   cout << "Calculating prime numbers up to " << limit << " please wait ..." << endl;
   // Démarrage du chronomètre
   auto start = chrono::high_resolution_clock::now();
