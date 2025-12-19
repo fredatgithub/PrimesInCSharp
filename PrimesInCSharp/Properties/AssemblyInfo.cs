@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("PrimesInCSharp")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("e-SNCF")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PrimesInCSharp")]
-[assembly: AssemblyCopyright("Copyright © e-SNCF 2025")]
+[assembly: AssemblyCopyright("Copyright © 2025 MIT Freddy Juhel")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

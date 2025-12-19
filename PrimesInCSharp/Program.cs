@@ -9,17 +9,23 @@ namespace PrimesInCSharp
     static void Main()
     {
       Action<string> Display = Console.WriteLine;
-      // time how long it takes to compute primes up to 1 million
-      int limit = 100;
+      // time how long it takes to compute primes up to a certain number
+      int limit = 100_000_000;
+      // 10_000 1ms
+      // 100_000 15ms
+      // 1_000_000 377ms
+      // 10_000_000 9s 71ms
+      // 100_000_000 04m:32s:126ms
       Stopwatch chrono = new Stopwatch();
       chrono.Start();
       List<int> primes = GetPrimesUpTo(limit);
       chrono.Stop();
       Console.WriteLine($"Prime numbers up to {limit}:");
       Console.WriteLine(string.Join(", ", primes));
-      Display($"Time taken to compute primes up to {limit}: {ToHourMinutesSeconds(chrono.Elapsed)}");
+      Display($"Time taken to compute primes up to {limit}: {ToDaysHoursMinutesSeconds(chrono.Elapsed)}");
 
-      
+      Display("Press any key to exit...");
+      Console.ReadKey();
     }
 
     private static List<int> GetPrimesUpTo(int limit)
@@ -46,10 +52,20 @@ namespace PrimesInCSharp
       return primes;
     }
 
-    private static string ToHourMinutesSeconds(TimeSpan timeSpan)
+    private static string ToDaysHoursMinutesSeconds(TimeSpan timeSpan)
     {
-      return string.Format("{0:D2}h:{1:D2}m:{2:D2}s:{3:D2}",
-          timeSpan.Hours,
+      if (timeSpan.Days > 0)
+      {
+        return string.Format("{0}j {1:D2}h:{2:D2}m:{3:D2}s:{4:D3}ms",
+            timeSpan.Days,
+            timeSpan.Hours,
+            timeSpan.Minutes,
+            timeSpan.Seconds,
+            timeSpan.Milliseconds);
+      }
+
+      return string.Format("{0:D2}h:{1:D2}m:{2:D2}s:{3:D3}ms",
+          (int)timeSpan.TotalHours,
           timeSpan.Minutes,
           timeSpan.Seconds,
           timeSpan.Milliseconds);
