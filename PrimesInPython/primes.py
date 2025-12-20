@@ -40,7 +40,7 @@ def to_days_hours_minutes_seconds(elapsed_seconds: float) -> str:
 
 def main():
     limit = 10_000_000
-
+    # 10_000_000 in 1m 23s 985ms
     start = time.perf_counter()
     primes = get_primes_up_to(limit)
     end = time.perf_counter()
