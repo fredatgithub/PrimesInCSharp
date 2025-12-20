@@ -1,1 +1,1 @@
-# PrimesInCSharp
+# Primes in C#, C++ and Python
