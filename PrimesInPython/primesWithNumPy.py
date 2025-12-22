@@ -36,7 +36,8 @@ def to_days_hours_minutes_seconds(elapsed_seconds: float) -> str:
 
 def main():
     limit = 10_000_000
-
+    # 10_000_000 in 62ms in NumPy
+    # Time taken to compute primes up to 10 000 000: 00h:00m:00s:062ms
     start = time.perf_counter()
     primes = get_primes_up_to_numpy(limit)
     end = time.perf_counter()
