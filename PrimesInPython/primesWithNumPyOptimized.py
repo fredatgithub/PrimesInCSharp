@@ -41,8 +41,9 @@ def main():
     limit = 100_000_000_000
     # Crible segmenté pour 10 milliards
     # 10_000_000_000 in ~2 minutes on a typical machine
-    # Number of primes up to 10000000000: 455052511 # Time: 77.61 seconds
-    # Number of primes up to 10000000000: 455052511 # Time: 76.94 seconds
+    # Number of primes up to 10000000000: 455 052 511   # Time: 77.61 seconds
+    # Number of primes up to 10000000000: 455 052 511   # Time: 76.94 seconds
+    # Number of primes up to 100000000000: 4 118 054 813 # Time: 889.11 seconds
     start = time.perf_counter()
     prime_count = segmented_sieve(limit)
     end = time.perf_counter()
