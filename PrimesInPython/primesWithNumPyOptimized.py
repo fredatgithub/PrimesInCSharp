@@ -38,7 +38,7 @@ def segmented_sieve(limit: int, segment_size: int = 100_000_000) -> int:
 
 
 def main():
-    limit = 10_000_000_000
+    limit = 100_000_000_000
     # Crible segmenté pour 10 milliards
     # 10_000_000_000 in ~2 minutes on a typical machine
     # Number of primes up to 10000000000: 455052511 # Time: 77.61 seconds
