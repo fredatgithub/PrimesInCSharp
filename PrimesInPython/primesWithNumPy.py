@@ -41,6 +41,10 @@ def main():
     # Time taken to compute primes up to 100 000 000: 00h:00m:00s:663ms
     # Time taken to compute primes up to 1 000 000 000: 00h:00m:09s:638ms
     # error for 10_000_000_000
+    # Ton code est correct pour ≤ 10⁹
+    # Pour 10¹⁰, le crible segmenté est obligatoire
+    # Même avec 64 GB, on ne peut pas allouer un tableau de taille N
+
     start = time.perf_counter()
     primes = get_primes_up_to_numpy(limit)
     end = time.perf_counter()
