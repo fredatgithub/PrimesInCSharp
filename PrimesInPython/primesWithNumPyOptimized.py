@@ -45,7 +45,7 @@ def main():
     # Number of primes up to 10_000_000_000: 455 052 511   # Time: 1 minute and 16.94 seconds
     # Number of primes up to 100_000_000_000: 4 118 054 813 # Time: 14 minutes and  49.11 seconds
     # Number of primes up to 1_000_000_000_000: 37 607 912 018 Time: 2 heures, 49 minutes et 3,23 secondes
-start = time.perf_counter()
+    start = time.perf_counter()
     prime_count = segmented_sieve(limit)
     end = time.perf_counter()
 
