@@ -131,7 +131,7 @@ def main():
 
         print(f"Starting searching from: {format_number(start_number)}\n")
         print(f"Searching for {INCREMENT_NUMBER} numbers after {format_number(start_number)}")
-        print(f"Processing numbers until {format_number(end_number)}\n")
+        print(f"Processing numbers until         {format_number(end_number)}\n")
 
         primes = []
         counter = 0
