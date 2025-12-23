@@ -117,7 +117,12 @@ def main():
         print(f"Search started on {now}\n")
 
         # Continuer depuis le dernier nombre
-        last_number = int(read_file("lastNumber.txt"))
+        s = read_file("lastNumber.txt")
+        print(repr(s))
+        last_number = int(read_file("lastNumber.txt").lstrip("\ufeff"))
+        print(f"Last number is: {last_number}")
+
+        # last_number = int(read_file("lastNumber.txt"))
         if last_number % 2 == 0:
             last_number += 1
 

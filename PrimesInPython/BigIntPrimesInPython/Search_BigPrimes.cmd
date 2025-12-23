@@ -1,0 +1,2 @@
+py BigIntegerDetermistic.py
+pause
