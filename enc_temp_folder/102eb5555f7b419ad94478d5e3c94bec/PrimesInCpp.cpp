@@ -28,7 +28,7 @@ int main()
   // 1_410_065_408: 38m:14s:773ms on desktop in C++ with optimized code
   // 10'000'000'000 XXXXXXXXXXXXXXXXXX in C++ on desktop
 
-  std::cout << "Compilation of this program has been done with " << VersionCpp(__cplusplus) << std::endl;
+  std::cout << "Compilation of this program has been done with __cplusplus = " << VersionCpp(__cplusplus) << std::endl;
   cout << "Calculating prime numbers up to " << formatWithThousands(limit) << " please wait ..." << endl;
   const char* jours[] = {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
   
