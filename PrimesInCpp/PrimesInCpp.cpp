@@ -26,10 +26,7 @@ int main()
   // 10'000'000'000 XXXXXXXXXXXXXXXXXX in C++ on desktop
 
   cout << "Calculating prime numbers up to " << limit << " please wait ..." << endl;
-  const char* jours[] = {
-    "Dimanche", "Lundi", "Mardi",
-    "Mercredi", "Jeudi", "Vendredi", "Samedi"
-  };
+  const char* jours[] = {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
   
   auto now = std::chrono::system_clock::now();
   std::time_t t = std::chrono::system_clock::to_time_t(now);
