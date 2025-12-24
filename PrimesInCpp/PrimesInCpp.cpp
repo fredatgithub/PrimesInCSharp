@@ -23,7 +23,7 @@ int main()
   // 1_000_000_000 47m:19s:642ms in C++ on desktop
   // 1'410'065'408: 01h : 17m : 29s : 825ms on Desktop in C++ (all primes stored in memory)
   // 10'000'000'000 XXXXXXXXXXXXXXXXXX in C++ on desktop
-  // 1_000_000_000 xxm:xxs:xms in C++ on desktop with optimized code
+  // 1_000_000_000 23m:54s:108ms in C++ on desktop with optimized code
 
   cout << "Calculating prime numbers up to " << limit << " please wait ..." << endl;
   const char* jours[] = {
