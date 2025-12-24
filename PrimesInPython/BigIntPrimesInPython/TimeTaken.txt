@@ -1,0 +1,1 @@
+To search for prime numbers within 5000 numbers, it took : 9 heures 49 minutes 57 secondes starting at 18446744073714914941 and ending at 18446744073714919941
