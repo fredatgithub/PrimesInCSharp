@@ -13,14 +13,16 @@ string ToDaysHoursMinutesSeconds(chrono::milliseconds duration);
 
 int main()
 {
-  const int limit = 10'000'000'000;
+  const int limit = 1'000'000'000;
   // 10_000 0ms too fast to measure
   // 100_000 15ms in C# and 7ms in C++
   // 1_000_000 377ms in C# and 165ms in C++
   // 10_000_000 9s 71ms on laptop and 6s 360ms on desktop in C# and 4s 153ms on Desktop in C++
   // 100_000_000 04m:32s:126ms in C# and 01m:45s:528ms in C++
   // 1_000_000_000 47m:19s:642ms in C++ on desktop
+  // 1'410'065'408: 01h : 17m : 29s : 825ms on Desktop in C++ (all primes stored in memory)
   // 10'000'000'000 XXXXXXXXXXXXXXXXXX in C++ on desktop
+  // 1_000_000_000 xxm:xxs:xms in C++ on desktop with optimized code
 
   cout << "Calculating prime numbers up to " << limit << " please wait ..." << endl;
   // Démarrage du chronomètre
@@ -46,27 +48,32 @@ int main()
   return 0;
 }
 
+bool static IsPrime(int number)
+{
+  if (number <= 1) return false;
+  if (number == 2 || number == 3 || number == 5) return true;
+  if (number % 2 == 0 || number % 3 == 0 || number % 5 == 0) return false;
+  int squareRoot = static_cast<int>(sqrt(number));
+  for (int divisor = 7; divisor <= squareRoot; divisor += 2)
+  {
+    if (number % divisor == 0)
+    {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 vector<int> GetPrimesUpTo(int limit)
 {
   vector<int> primes;
 
-  for (int num = 2; num <= limit; num++)
+  for (int number = 2; number <= limit; number++)
   {
-    bool isPrime = true;
-    int squareRoot = static_cast<int>(sqrt(num));
-
-    for (int i = 2; i <= squareRoot; i++)
+    if (IsPrime(number))
     {
-      if (num % i == 0)
-      {
-        isPrime = false;
-        break;
-      }
-    }
-
-    if (isPrime)
-    {
-      primes.push_back(num);
+      primes.push_back(number);
     }
   }
 
