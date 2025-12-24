@@ -9,13 +9,13 @@
 using namespace std;
 
 // Déclaration des fonctions
-vector<long long> GetPrimesUpTo(long long limit);
+vector<unsigned long long> GetPrimesUpTo(unsigned long long limit);
 string ToDaysHoursMinutesSeconds(chrono::milliseconds duration);
-string formatWithThousands(long long number);
+string formatWithThousands(unsigned long long number);
 
 int main()
 {
-  const long long limit = 10'000'000'000;
+  const unsigned long long limit = 10'000'000'000;
   // 10_000 0ms too fast to measure
   // 100_000 15ms in C# and 7ms in C++
   // 1_000_000 377ms in C# and 165ms in C++
@@ -50,7 +50,7 @@ int main()
   // Démarrage du chronomètre
   auto start = chrono::high_resolution_clock::now();
 
-  vector<long long> primes = GetPrimesUpTo(limit);
+  vector<unsigned long long> primes = GetPrimesUpTo(limit);
 
   auto end = chrono::high_resolution_clock::now();
   auto elapsed = chrono::duration_cast<chrono::milliseconds>(end - start);
@@ -65,7 +65,7 @@ int main()
   return 0;
 }
 
-static string formatWithThousands(long long number) {
+static string formatWithThousands(unsigned long long number) {
   string numberAsString = std::to_string(number);
   int insertPosition = numberAsString.length() - 3;
   while (insertPosition > 0)
@@ -94,13 +94,13 @@ bool static IsPrime(int number)
   return true;
 }
 
-bool static IsPrime(long long number)
+bool static IsPrime(unsigned long long number)
 {
   if (number <= 1) return false;
   if (number == 2 || number == 3 || number == 5) return true;
   if (number % 2 == 0 || number % 3 == 0 || number % 5 == 0) return false;
-  int squareRoot = static_cast<int>(sqrt(number));
-  for (long long divisor = 7; divisor <= squareRoot; divisor += 2)
+  int squareRoot = static_cast<unsigned long long>(sqrt(number));
+  for (unsigned long long divisor = 7; divisor <= squareRoot; divisor += 2)
   {
     if (number % divisor == 0)
     {
@@ -111,12 +111,12 @@ bool static IsPrime(long long number)
   return true;
 }
 
-static vector<long long> GetPrimesUpTo(long long limit)
+static vector<unsigned long long> GetPrimesUpTo(unsigned long long limit)
 {
-  vector<long long> primes;
+  vector<unsigned long long> primes;
   primes.push_back(2);
 
-  for (long long number = 3; number <= limit; number += 2)
+  for (unsigned long long number = 3; number <= limit; number += 2)
   {
     if (IsPrime(number))
     {
@@ -160,4 +160,3 @@ string ToDaysHoursMinutesSeconds(chrono::milliseconds duration)
 
   return ss.str();
 }
-
