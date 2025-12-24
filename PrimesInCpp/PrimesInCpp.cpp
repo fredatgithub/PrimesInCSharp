@@ -9,12 +9,13 @@
 using namespace std;
 
 // Déclaration des fonctions
-vector<int> GetPrimesUpTo(int limit);
+vector<long long> GetPrimesUpTo(long long limit);
 string ToDaysHoursMinutesSeconds(chrono::milliseconds duration);
+string formatWithThousands(long long number);
 
 int main()
 {
-  const int limit = 10'000'000'000;
+  const long long limit = 10'000'000'000;
   // 10_000 0ms too fast to measure
   // 100_000 15ms in C# and 7ms in C++
   // 1_000_000 377ms in C# and 165ms in C++
@@ -23,9 +24,10 @@ int main()
   // 1_000_000_000 47m:19s:642ms in C++ on desktop
   // 1'410'065'408: 01h : 17m : 29s : 825ms on Desktop in C++ (all primes stored in memory)
   // 1_000_000_000 23m:54s:108ms in C++ on desktop with optimized code
+  // 1_410_065_408: 38m:14s:773ms on desktop in C++ with optimized code
   // 10'000'000'000 XXXXXXXXXXXXXXXXXX in C++ on desktop
 
-  cout << "Calculating prime numbers up to " << limit << " please wait ..." << endl;
+  cout << "Calculating prime numbers up to " << formatWithThousands(limit) << " please wait ..." << endl;
   const char* jours[] = {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
   
   auto now = std::chrono::system_clock::now();
@@ -48,24 +50,31 @@ int main()
   // Démarrage du chronomètre
   auto start = chrono::high_resolution_clock::now();
 
-  vector<int> primes = GetPrimesUpTo(limit);
+  vector<long long> primes = GetPrimesUpTo(limit);
 
   auto end = chrono::high_resolution_clock::now();
   auto elapsed = chrono::duration_cast<chrono::milliseconds>(end - start);
 
-  cout << "Prime numbers up to " << limit << ":" << endl;
-  // Affichage optionnel des nombres premiers
-  // for (int p : primes) cout << p << " ";
-  // cout << endl;
-
-  cout << "Time taken to compute primes up to "
-    << limit << ": "
+  cout << "Prime numbers up to " << formatWithThousands(limit) << ":" << endl;
+  cout << "Time taken to compute primes up to " << formatWithThousands(limit) << ": "
     << ToDaysHoursMinutesSeconds(elapsed) << endl;
 
   cout << "Press Enter to exit...";
   cin.get();
 
   return 0;
+}
+
+static string formatWithThousands(long long number) {
+  string numberAsString = std::to_string(number);
+  int insertPosition = numberAsString.length() - 3;
+  while (insertPosition > 0)
+  {
+    numberAsString.insert(insertPosition, "'");
+    insertPosition -= 3;
+  }
+
+  return numberAsString;
 }
 
 bool static IsPrime(int number)
@@ -85,11 +94,29 @@ bool static IsPrime(int number)
   return true;
 }
 
-vector<int> GetPrimesUpTo(int limit)
+bool static IsPrime(long long number)
 {
-  vector<int> primes;
+  if (number <= 1) return false;
+  if (number == 2 || number == 3 || number == 5) return true;
+  if (number % 2 == 0 || number % 3 == 0 || number % 5 == 0) return false;
+  int squareRoot = static_cast<int>(sqrt(number));
+  for (long long divisor = 7; divisor <= squareRoot; divisor += 2)
+  {
+    if (number % divisor == 0)
+    {
+      return false;
+    }
+  }
 
-  for (int number = 2; number <= limit; number++)
+  return true;
+}
+
+static vector<long long> GetPrimesUpTo(long long limit)
+{
+  vector<long long> primes;
+  primes.push_back(2);
+
+  for (long long number = 3; number <= limit; number += 2)
   {
     if (IsPrime(number))
     {

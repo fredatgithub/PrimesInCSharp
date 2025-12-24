@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimesInCSharp", "PrimesInC
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PrimesInCpp", "PrimesInCpp\PrimesInCpp.vcxproj", "{923F6D0C-7EAC-468B-923F-06452B413D4C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BigIntegerCpp", "BigIntegerCpp\BigIntegerCpp.vcxproj", "{A22D68CC-6170-4D3B-BD67-01BFF770F479}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,18 @@ Global
 		{923F6D0C-7EAC-468B-923F-06452B413D4C}.Release|x64.Build.0 = Release|x64
 		{923F6D0C-7EAC-468B-923F-06452B413D4C}.Release|x86.ActiveCfg = Release|Win32
 		{923F6D0C-7EAC-468B-923F-06452B413D4C}.Release|x86.Build.0 = Release|Win32
+		{A22D68CC-6170-4D3B-BD67-01BFF770F479}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{A22D68CC-6170-4D3B-BD67-01BFF770F479}.Debug|Any CPU.Build.0 = Debug|x64
+		{A22D68CC-6170-4D3B-BD67-01BFF770F479}.Debug|x64.ActiveCfg = Debug|x64
+		{A22D68CC-6170-4D3B-BD67-01BFF770F479}.Debug|x64.Build.0 = Debug|x64
+		{A22D68CC-6170-4D3B-BD67-01BFF770F479}.Debug|x86.ActiveCfg = Debug|Win32
+		{A22D68CC-6170-4D3B-BD67-01BFF770F479}.Debug|x86.Build.0 = Debug|Win32
+		{A22D68CC-6170-4D3B-BD67-01BFF770F479}.Release|Any CPU.ActiveCfg = Release|x64
+		{A22D68CC-6170-4D3B-BD67-01BFF770F479}.Release|Any CPU.Build.0 = Release|x64
+		{A22D68CC-6170-4D3B-BD67-01BFF770F479}.Release|x64.ActiveCfg = Release|x64
+		{A22D68CC-6170-4D3B-BD67-01BFF770F479}.Release|x64.Build.0 = Release|x64
+		{A22D68CC-6170-4D3B-BD67-01BFF770F479}.Release|x86.ActiveCfg = Release|Win32
+		{A22D68CC-6170-4D3B-BD67-01BFF770F479}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
