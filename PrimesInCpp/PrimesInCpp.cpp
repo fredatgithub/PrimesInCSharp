@@ -12,6 +12,7 @@ using namespace std;
 vector<unsigned long long> GetPrimesUpTo(unsigned long long limit);
 string ToDaysHoursMinutesSeconds(chrono::milliseconds duration);
 string formatWithThousands(unsigned long long number);
+string VersionCpp(long number);
 
 int main()
 {
@@ -27,6 +28,7 @@ int main()
   // 1_410_065_408: 38m:14s:773ms on desktop in C++ with optimized code
   // 10'000'000'000 XXXXXXXXXXXXXXXXXX in C++ on desktop
 
+  std::cout << "Compilation of this program has been done with __cplusplus = " << VersionCpp(__cplusplus) << std::endl;
   cout << "Calculating prime numbers up to " << formatWithThousands(limit) << " please wait ..." << endl;
   const char* jours[] = {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
   
@@ -75,6 +77,16 @@ static string formatWithThousands(unsigned long long number) {
   }
 
   return numberAsString;
+}
+
+string static VersionCpp(long version)
+{
+  if (version >= 202002L) return "C++20 or later";
+  if (version >= 201703L) return "C++17";
+  if (version >= 201402L) return "C++14";
+  if (version >= 201103L) return "C++11";
+  if (version >= 199711L) return "C++98";
+  return "pre-standard C++";
 }
 
 bool static IsPrime(int number)
