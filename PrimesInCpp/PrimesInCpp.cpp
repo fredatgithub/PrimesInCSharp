@@ -4,6 +4,7 @@
 #include <chrono>
 #include <iomanip>
 #include <sstream>
+#include <ctime>
 
 using namespace std;
 
@@ -25,6 +26,29 @@ int main()
   // 1_000_000_000 xxm:xxs:xms in C++ on desktop with optimized code
 
   cout << "Calculating prime numbers up to " << limit << " please wait ..." << endl;
+  const char* jours[] = {
+    "Dimanche", "Lundi", "Mardi",
+    "Mercredi", "Jeudi", "Vendredi", "Samedi"
+  };
+
+  
+  auto now = std::chrono::system_clock::now();
+  std::time_t t = std::chrono::system_clock::to_time_t(now);
+
+  std::tm tm{};
+  localtime_s(&tm, &t);
+
+  std::cout << "starting on: ";
+  std::cout << jours[tm.tm_wday] << " "
+    << std::setfill('0')
+    << std::setw(2) << tm.tm_mday << "/"
+    << std::setw(2) << (tm.tm_mon + 1) << "/"
+    << (tm.tm_year + 1900) << " "
+    << std::setw(2) << tm.tm_hour << ":"
+    << std::setw(2) << tm.tm_min << ":"
+    << std::setw(2) << tm.tm_sec
+    << std::endl;
+
   // Démarrage du chronomètre
   auto start = chrono::high_resolution_clock::now();
 
