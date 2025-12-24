@@ -14,7 +14,7 @@ string ToDaysHoursMinutesSeconds(chrono::milliseconds duration);
 
 int main()
 {
-  const int limit = 1'000'000'000;
+  const int limit = 10'000'000'000;
   // 10_000 0ms too fast to measure
   // 100_000 15ms in C# and 7ms in C++
   // 1_000_000 377ms in C# and 165ms in C++
@@ -22,15 +22,14 @@ int main()
   // 100_000_000 04m:32s:126ms in C# and 01m:45s:528ms in C++
   // 1_000_000_000 47m:19s:642ms in C++ on desktop
   // 1'410'065'408: 01h : 17m : 29s : 825ms on Desktop in C++ (all primes stored in memory)
-  // 10'000'000'000 XXXXXXXXXXXXXXXXXX in C++ on desktop
   // 1_000_000_000 23m:54s:108ms in C++ on desktop with optimized code
+  // 10'000'000'000 XXXXXXXXXXXXXXXXXX in C++ on desktop
 
   cout << "Calculating prime numbers up to " << limit << " please wait ..." << endl;
   const char* jours[] = {
     "Dimanche", "Lundi", "Mardi",
     "Mercredi", "Jeudi", "Vendredi", "Samedi"
   };
-
   
   auto now = std::chrono::system_clock::now();
   std::time_t t = std::chrono::system_clock::to_time_t(now);
