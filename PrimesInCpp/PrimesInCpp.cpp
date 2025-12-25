@@ -26,7 +26,7 @@ int main()
   // 1'410'065'408: 01h : 17m : 29s : 825ms on Desktop in C++ (all primes stored in memory)
   // 1_000_000_000 23m:54s:108ms in C++ on desktop with optimized code
   // 1_410_065_408: 38m:14s:773ms on desktop in C++ with optimized code
-  // 10'000'000'000 XXXXXXXXXXXXXXXXXX in C++ on desktop
+  // 10'000'000'000 XXXXXXX environ 1 jours, 8 heures et 10 minutes in C++ on desktop
 
   std::cout << "Compilation of this program has been done with " << VersionCpp(__cplusplus) << std::endl;
   cout << "Calculating prime numbers up to " << formatWithThousands(limit) << " please wait ..." << endl;
