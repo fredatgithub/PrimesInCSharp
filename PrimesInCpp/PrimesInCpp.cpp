@@ -127,9 +127,31 @@ static vector<unsigned long long> GetPrimesUpTo(unsigned long long limit)
 {
   vector<unsigned long long> primes;
   primes.push_back(2);
+  auto now = std::chrono::system_clock::now();
+  std::time_t t = std::chrono::system_clock::to_time_t(now);
+  std::tm tm{};
+  localtime_s(&tm, &t);
+  const char* jours[] = { "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" };
+  std::ostringstream oss;
+  oss << jours[tm.tm_wday] << " "
+    << std::setfill('0')
+    << std::setw(2) << tm.tm_mday << "/"
+    << std::setw(2) << (tm.tm_mon + 1) << "/"
+    << (tm.tm_year + 1900) << " "
+    << std::setw(2) << tm.tm_hour << ":"
+    << std::setw(2) << tm.tm_min << ":"
+    << std::setw(2) << tm.tm_sec;
+  std::string today = oss.str();
 
+  std::ostringstream formattedNumber;
+  formattedNumber << formatWithThousands(limit);
+  std::string limitNumber = formattedNumber.str();
+  
   for (unsigned long long number = 3; number <= limit; number += 2)
   {
+    cout << formatWithThousands(number) << " out of " << limitNumber << " started on ";
+    std::cout << today << endl;
+
     if (IsPrime(number))
     {
       primes.push_back(number);
