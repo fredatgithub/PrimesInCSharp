@@ -2,5 +2,7 @@
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    std::cout << "Computing big integer primes\n";
+
+    return 0;
 }

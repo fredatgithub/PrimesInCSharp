@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <sstream>
 #include <ctime>
+#include <limits>
 
 using namespace std;
 
@@ -28,7 +29,10 @@ int main()
   // 1_410_065_408: 38m:14s:773ms on desktop in C++ with optimized code
   // 10'000'000'000 XXXXXXX environ 11 jours, 8 heures et 10 minutes in C++ on desktop
 
+
+  constexpr unsigned long long maximumUnsignedLongLong = std::numeric_limits<unsigned long long>::max();
   std::cout << "Compilation of this program has been done with " << VersionCpp(__cplusplus) << std::endl;
+  cout << "The maximum value of unsigned long long is " << formatWithThousands(maximumUnsignedLongLong) << endl;
   cout << "Calculating prime numbers up to " << formatWithThousands(limit) << " please wait ..." << endl;
   const char* jours[] = {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
   
