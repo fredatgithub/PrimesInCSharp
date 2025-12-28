@@ -85,6 +85,27 @@ string static VersionCpp(long version)
   return "pre-standard C++";
 }
 
+const char* jours[] = { "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" };
+
+inline static std::string formatDuration(std::chrono::milliseconds duration)
+{
+  using namespace std::chrono;
+
+  auto hours = duration.count() / (1000LL * 60 * 60);
+  auto minutes = (duration.count() / (1000LL * 60)) % 60;
+  auto seconds = (duration.count() / 1000) % 60;
+  auto milliseconds = duration.count() % 1000;
+
+  std::ostringstream oss;
+  oss << std::setfill('0')
+    << std::setw(2) << hours << ":"
+    << std::setw(2) << minutes << ":"
+    << std::setw(2) << seconds << "."
+    << std::setw(3) << milliseconds;
+
+  return oss.str();
+}
+
 int main()
 {
     cout << "Computing big integer primes compiled with ";
@@ -95,7 +116,7 @@ int main()
     std::time_t t = std::chrono::system_clock::to_time_t(now);
     std::tm tm{};
     localtime_s(&tm, &t);
-    const char* jours[] = { "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" };
+    
     std::ostringstream oss;
     oss << jours[tm.tm_wday] << " "
       << std::setfill('0')
@@ -110,14 +131,21 @@ int main()
     cpp_int number = cpp_int("18446744073714979933");
     cout << formatWithThousands(number) << " started on ";
     cout << today << endl;
+    // Start
+    auto start = std::chrono::steady_clock::now();
     if (IsPrime(number))
     {
-      cout << number << " est premier" << std::endl;
+      cout << formatWithThousands(number) << " est premier" << std::endl;
     }
     else
     {
-      cout << number << " n'est pas premier" << std::endl;
+      cout << formatWithThousands(number) << " n'est pas premier" << std::endl;
     }
+
+    // Stop
+    auto stop = std::chrono::steady_clock::now();
+    auto duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
+    
 
     return EXIT_SUCCESS;
 }

@@ -126,6 +126,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BigIntegerCpp.cpp" />
+    <ClCompile Include="Chrono.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Chrono.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
