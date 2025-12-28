@@ -87,6 +87,11 @@ string static VersionCpp(long version)
 
 const char* jours[] = { "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" };
 
+string static Pluralize(size_t count)
+{
+  return (count > 1) ? "s" : "";
+}
+
 inline static std::string formatDuration(std::chrono::milliseconds duration)
 {
   using namespace std::chrono;
@@ -97,11 +102,26 @@ inline static std::string formatDuration(std::chrono::milliseconds duration)
   auto milliseconds = duration.count() % 1000;
 
   std::ostringstream oss;
-  oss << std::setfill('0')
-    << std::setw(2) << hours << ":"
-    << std::setw(2) << minutes << ":"
-    << std::setw(2) << seconds << "."
-    << std::setw(3) << milliseconds;
+  oss << std::setfill('0');
+  if (hours > 0)
+  {
+    oss << std::setw(2) << hours << Pluralize(hours) << ":";
+  }
+    
+  if (minutes > 0)
+  {
+    oss << std::setw(2) << minutes << Pluralize(minutes) << ":";
+  }
+
+  if (seconds > 0)
+  {
+    oss << std::setw(2) << seconds << Pluralize(seconds) << ".";
+  }
+
+  if (milliseconds > 0)
+  {
+    oss << std::setw(3) << milliseconds << Pluralize(milliseconds);
+  }
 
   return oss.str();
 }
@@ -145,7 +165,7 @@ int main()
     // Stop
     auto stop = std::chrono::steady_clock::now();
     auto duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
-    
+    std::cout << "Temps ecoule : " << formatDuration(duration) << std::endl;
 
     return EXIT_SUCCESS;
 }
