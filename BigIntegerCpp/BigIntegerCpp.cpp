@@ -105,22 +105,22 @@ inline static std::string formatDuration(std::chrono::milliseconds duration)
   oss << std::setfill('0');
   if (hours > 0)
   {
-    oss << std::setw(2) << hours << Pluralize(hours) << ":";
+    oss << std::setw(2) << hours << " heure" <<  Pluralize(hours) << " ";
   }
     
   if (minutes > 0)
   {
-    oss << std::setw(2) << minutes << Pluralize(minutes) << ":";
+    oss << std::setw(2) << minutes << " minute" << Pluralize(minutes) << " ";
   }
 
   if (seconds > 0)
   {
-    oss << std::setw(2) << seconds << Pluralize(seconds) << ".";
+    oss << std::setw(2) << seconds << " seconde" << Pluralize(seconds) << " ";
   }
 
   if (milliseconds > 0)
   {
-    oss << std::setw(3) << milliseconds << Pluralize(milliseconds);
+    oss << std::setw(3) << milliseconds << " milliseconde" << Pluralize(milliseconds);
   }
 
   return oss.str();
