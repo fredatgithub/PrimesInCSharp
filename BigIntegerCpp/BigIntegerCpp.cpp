@@ -101,7 +101,7 @@ inline static std::string formatDuration(std::chrono::milliseconds duration)
   auto seconds = (duration.count() / 1000) % 60;
   auto milliseconds = duration.count() % 1000;
 
-  std::ostringstream oss;
+  ostringstream oss;
   oss << std::setfill('0');
   if (hours > 0)
   {
@@ -132,21 +132,21 @@ int main()
     cout << "C++ version: " << VersionCpp(__cplusplus) << std::endl;
     cout << "please wait..." << std::endl;
 
-    auto now = std::chrono::system_clock::now();
-    std::time_t t = std::chrono::system_clock::to_time_t(now);
-    std::tm tm{};
+    auto now = chrono::system_clock::now();
+    time_t t = chrono::system_clock::to_time_t(now);
+    tm tm{};
     localtime_s(&tm, &t);
     
     std::ostringstream oss;
     oss << jours[tm.tm_wday] << " "
-      << std::setfill('0')
-      << std::setw(2) << tm.tm_mday << "/"
-      << std::setw(2) << (tm.tm_mon + 1) << "/"
+      << setfill('0')
+      << setw(2) << tm.tm_mday << "/"
+      << setw(2) << (tm.tm_mon + 1) << "/"
       << (tm.tm_year + 1900) << " "
-      << std::setw(2) << tm.tm_hour << ":"
-      << std::setw(2) << tm.tm_min << ":"
-      << std::setw(2) << tm.tm_sec;
-    std::string today = oss.str();
+      << setw(2) << tm.tm_hour << ":"
+      << setw(2) << tm.tm_min << ":"
+      << setw(2) << tm.tm_sec;
+    string today = oss.str();
     
     cpp_int number = cpp_int("18446744073714979933");
     cout << formatWithThousands(number) << " started on ";
@@ -155,17 +155,17 @@ int main()
     auto start = std::chrono::steady_clock::now();
     if (IsPrime(number))
     {
-      cout << formatWithThousands(number) << " est premier" << std::endl;
+      cout << formatWithThousands(number) << " est premier" << endl;
     }
     else
     {
-      cout << formatWithThousands(number) << " n'est pas premier" << std::endl;
+      cout << formatWithThousands(number) << " n'est pas premier" << endl;
     }
 
     // Stop
-    auto stop = std::chrono::steady_clock::now();
+    auto stop = chrono::steady_clock::now();
     auto duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
-    std::cout << "Temps ecoule : " << formatDuration(duration) << std::endl;
+    cout << "Temps ecoule : " << formatDuration(duration) << endl;
 
     return EXIT_SUCCESS;
 }
