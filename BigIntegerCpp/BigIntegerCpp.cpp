@@ -195,6 +195,18 @@ int main()
   else
   {
     cout << formatWithThousands(number) << " n'est pas premier" << endl;
+    // trouver les diviseurs
+    cpp_int squareRoot = sqrt(number);
+    cout << "Recherche des diviseurs jusqu'a " << formatWithThousands(squareRoot) << " ..." << endl;
+    for (cpp_int divisor = 2; divisor <= squareRoot; ++divisor)
+    {
+      if (number % divisor == 0)
+      {
+        cout << "Diviseur trouve: " << formatWithThousands(divisor) << endl;
+      }
+    }
+
+    cout << "Fin de la recherche des diviseurs" << endl;
   }
 
   // Stop
