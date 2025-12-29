@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <boost/multiprecision/cpp_int.hpp>
 #include <vector>
 #include <cmath>
@@ -7,6 +7,9 @@
 #include <sstream>
 #include <ctime>
 #include <limits>
+#include <fstream>
+#include <string>
+#include <filesystem>
 
 using namespace std;
 using boost::multiprecision::cpp_int;
@@ -16,7 +19,7 @@ bool static IsPrime(const cpp_int& number)
   if (number <= 1) return false;
   if (number == 2 || number == 3 || number == 5) return true;
   if (number % 2 == 0 || number % 3 == 0 || number % 5 == 0) return false;
-  
+
   cpp_int squareRoot = sqrt(number);
   for (cpp_int divisor = 7; divisor <= squareRoot; divisor += 2)
   {
@@ -62,7 +65,7 @@ string ToDaysHoursMinutesSeconds(chrono::milliseconds duration)
   return ss.str();
 }
 
-static string formatWithThousands(cpp_int number) 
+static string formatWithThousands(cpp_int number)
 {
   std::string numberAsString = number.convert_to<std::string>();
   int insertPosition = numberAsString.length() - 3;
@@ -105,9 +108,9 @@ inline static std::string formatDuration(std::chrono::milliseconds duration)
   oss << std::setfill('0');
   if (hours > 0)
   {
-    oss << std::setw(2) << hours << " heure" <<  Pluralize(hours) << " ";
+    oss << std::setw(2) << hours << " heure" << Pluralize(hours) << " ";
   }
-    
+
   if (minutes > 0)
   {
     oss << std::setw(2) << minutes << " minute" << Pluralize(minutes) << " ";
@@ -128,44 +131,76 @@ inline static std::string formatDuration(std::chrono::milliseconds duration)
 
 int main()
 {
-    cout << "Computing big integer primes compiled with ";
-    cout << "C++ version: " << VersionCpp(__cplusplus) << std::endl;
-    cout << "please wait..." << std::endl;
+  const string nomFichier = "lastNumber.txt";
+  string lastNumberFileContent;
 
-    auto now = chrono::system_clock::now();
-    time_t t = chrono::system_clock::to_time_t(now);
-    tm tm{};
-    localtime_s(&tm, &t);
-    
-    std::ostringstream oss;
-    oss << jours[tm.tm_wday] << " "
-      << setfill('0')
-      << setw(2) << tm.tm_mday << "/"
-      << setw(2) << (tm.tm_mon + 1) << "/"
-      << (tm.tm_year + 1900) << " "
-      << setw(2) << tm.tm_hour << ":"
-      << setw(2) << tm.tm_min << ":"
-      << setw(2) << tm.tm_sec;
-    string today = oss.str();
-    
-    cpp_int number = cpp_int("18446744073714979933");
-    cout << formatWithThousands(number) << " started on ";
-    cout << today << endl;
-    // Start
-    auto start = std::chrono::steady_clock::now();
-    if (IsPrime(number))
+  // Vérifier si le fichier existe
+  if (!filesystem::exists(nomFichier))
+  {
+    // Créer le fichier et écrire "123"
+    ofstream fichierCreation(nomFichier);
+    if (!fichierCreation)
     {
-      cout << formatWithThousands(number) << " est premier" << endl;
-    }
-    else
-    {
-      cout << formatWithThousands(number) << " n'est pas premier" << endl;
+      cerr << "Erreur lors de la création du fichier\n";
+      return 1;
     }
 
-    // Stop
-    auto stop = chrono::steady_clock::now();
-    auto duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
-    cout << "Temps ecoule : " << formatDuration(duration) << endl;
+    fichierCreation << "18446744073714994941";
+    fichierCreation.close();
+  }
 
-    return EXIT_SUCCESS;
+  // Lire le contenu du fichier
+  ifstream fichierLecture(nomFichier);
+  if (!fichierLecture)
+  {
+    cerr << "Erreur lors de l'ouverture du fichier\n";
+    return 1;
+  }
+
+  getline(fichierLecture, lastNumberFileContent);
+  fichierLecture.close();
+
+  // Vérification
+  cout << "Contenu du fichier lastNumber.txt: " << lastNumberFileContent << endl;
+
+  cout << "Computing big integer primes compiled with ";
+  cout << "C++ version: " << VersionCpp(__cplusplus) << std::endl;
+  cout << "please wait..." << std::endl;
+
+  auto now = chrono::system_clock::now();
+  time_t t = chrono::system_clock::to_time_t(now);
+  tm tm{};
+  localtime_s(&tm, &t);
+
+  ostringstream oss;
+  oss << jours[tm.tm_wday] << " "
+    << setfill('0')
+    << setw(2) << tm.tm_mday << "/"
+    << setw(2) << (tm.tm_mon + 1) << "/"
+    << (tm.tm_year + 1900) << " "
+    << setw(2) << tm.tm_hour << ":"
+    << setw(2) << tm.tm_min << ":"
+    << setw(2) << tm.tm_sec;
+  string today = oss.str();
+
+  cpp_int number = cpp_int(lastNumberFileContent);
+  cout << formatWithThousands(number) << " started on ";
+  cout << today << endl;
+  // Start
+  auto start = chrono::steady_clock::now();
+  if (IsPrime(number))
+  {
+    cout << formatWithThousands(number) << " est premier" << endl;
+  }
+  else
+  {
+    cout << formatWithThousands(number) << " n'est pas premier" << endl;
+  }
+
+  // Stop
+  auto stop = chrono::steady_clock::now();
+  auto duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
+  cout << "Temps ecoule : " << formatDuration(duration) << endl;
+
+  return EXIT_SUCCESS;
 }
