@@ -16,6 +16,7 @@ namespace PrimesInCSharp
       // 1_000_000 377ms
       // 10_000_000 9s 71ms on laptop and 6s 360ms on desktop
       // 100_000_000 04m:32s:126ms
+      // 10_000_000 Time taken to compute primes up to 10_000_000: 00h:00m:11s:507ms
       Stopwatch chrono = new Stopwatch();
       chrono.Start();
       List<int> primes = GetPrimesUpTo(limit);

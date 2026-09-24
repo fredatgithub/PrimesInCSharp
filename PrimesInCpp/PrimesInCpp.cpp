@@ -29,28 +29,28 @@ int main()
   // 1_410_065_408: 38m:14s:773ms on desktop in C++ with optimized code
   // 10'000'000'000 XXXXXXX environ 11 jours, 8 heures et 10 minutes in C++ on desktop
 
-  constexpr unsigned long long maximumUnsignedLongLong = std::numeric_limits<unsigned long long>::max();
-  std::cout << "Compilation of this program has been done with " << VersionCpp(__cplusplus) << std::endl;
+  constexpr unsigned long long maximumUnsignedLongLong = numeric_limits<unsigned long long>::max();
+  cout << "Compilation of this program has been done with " << VersionCpp(__cplusplus) << endl;
   cout << "The maximum value of unsigned long long is " << formatWithThousands(maximumUnsignedLongLong) << endl;
   cout << "Calculating prime numbers up to " << formatWithThousands(limit) << " please wait ..." << endl;
   const char* jours[] = {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
   
-  auto now = std::chrono::system_clock::now();
-  std::time_t t = std::chrono::system_clock::to_time_t(now);
+  auto now = chrono::system_clock::now();
+  time_t t = chrono::system_clock::to_time_t(now);
 
-  std::tm tm{};
+  tm tm{};
   localtime_s(&tm, &t);
 
-  std::cout << "starting on: ";
-  std::cout << jours[tm.tm_wday] << " "
-    << std::setfill('0')
-    << std::setw(2) << tm.tm_mday << "/"
-    << std::setw(2) << (tm.tm_mon + 1) << "/"
+  cout << "starting on: ";
+  cout << jours[tm.tm_wday] << " "
+    << setfill('0')
+    << setw(2) << tm.tm_mday << "/"
+    << setw(2) << (tm.tm_mon + 1) << "/"
     << (tm.tm_year + 1900) << " "
-    << std::setw(2) << tm.tm_hour << ":"
-    << std::setw(2) << tm.tm_min << ":"
-    << std::setw(2) << tm.tm_sec
-    << std::endl;
+    << setw(2) << tm.tm_hour << ":"
+    << setw(2) << tm.tm_min << ":"
+    << setw(2) << tm.tm_sec
+    << endl;
 
   // Démarrage du chronomètre
   auto start = chrono::high_resolution_clock::now();
@@ -63,7 +63,7 @@ int main()
   cout << "Prime numbers up to " << formatWithThousands(limit) << ":" << endl;
   cout << "Time taken to compute primes up to " << formatWithThousands(limit) << ": "
     << ToDaysHoursMinutesSeconds(elapsed) << endl;
-
+	// 11'178'655 out of 10'000'000'000 started on Jeudi 24/09/2026 15:54:29 stop at 16:18:00 11 millions primes in 23 minutes and 31 seconds
   cout << "Press Enter to exit...";
   cin.get();
 
@@ -95,10 +95,10 @@ string static VersionCpp(long version)
 bool static IsPrime(int number)
 {
   if (number <= 1) return false;
-  if (number == 2 || number == 3 || number == 5) return true;
-  if (number % 2 == 0 || number % 3 == 0 || number % 5 == 0) return false;
+  if (number == 2 || number == 3 || number == 5 || number == 7) return true;
+  if (number % 2 == 0 || number % 3 == 0 || number % 5 == 0 || number % 7 == 0) return false;
   int squareRoot = static_cast<int>(sqrt(number));
-  for (int divisor = 7; divisor <= squareRoot; divisor += 2)
+  for (int divisor = 11; divisor <= squareRoot; divisor += 2)
   {
     if (number % divisor == 0)
     {
@@ -112,10 +112,10 @@ bool static IsPrime(int number)
 bool static IsPrime(unsigned long long number)
 {
   if (number <= 1) return false;
-  if (number == 2 || number == 3 || number == 5) return true;
-  if (number % 2 == 0 || number % 3 == 0 || number % 5 == 0) return false;
+  if (number == 2 || number == 3 || number == 5 || number == 7) return true;
+  if (number % 2 == 0 || number % 3 == 0 || number % 5 == 0 || number % 7 == 0) return false;
   int squareRoot = static_cast<unsigned long long>(sqrt(number));
-  for (unsigned long long divisor = 7; divisor <= squareRoot; divisor += 2)
+  for (unsigned long long divisor = 11; divisor <= squareRoot; divisor += 2)
   {
     if (number % divisor == 0)
     {
@@ -130,30 +130,30 @@ static vector<unsigned long long> GetPrimesUpTo(unsigned long long limit)
 {
   vector<unsigned long long> primes;
   primes.push_back(2);
-  auto now = std::chrono::system_clock::now();
-  std::time_t t = std::chrono::system_clock::to_time_t(now);
-  std::tm tm{};
+  auto now = chrono::system_clock::now();
+  time_t t = chrono::system_clock::to_time_t(now);
+  tm tm{};
   localtime_s(&tm, &t);
   const char* jours[] = { "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" };
   std::ostringstream oss;
   oss << jours[tm.tm_wday] << " "
-    << std::setfill('0')
-    << std::setw(2) << tm.tm_mday << "/"
-    << std::setw(2) << (tm.tm_mon + 1) << "/"
+    << setfill('0')
+    << setw(2) << tm.tm_mday << "/"
+    << setw(2) << (tm.tm_mon + 1) << "/"
     << (tm.tm_year + 1900) << " "
-    << std::setw(2) << tm.tm_hour << ":"
-    << std::setw(2) << tm.tm_min << ":"
-    << std::setw(2) << tm.tm_sec;
-  std::string today = oss.str();
+    << setw(2) << tm.tm_hour << ":"
+    << setw(2) << tm.tm_min << ":"
+    << setw(2) << tm.tm_sec;
+  string today = oss.str();
 
-  std::ostringstream formattedNumber;
+  ostringstream formattedNumber;
   formattedNumber << formatWithThousands(limit);
-  std::string limitNumber = formattedNumber.str();
+  string limitNumber = formattedNumber.str();
   
   for (unsigned long long number = 3; number <= limit; number += 2)
   {
     cout << formatWithThousands(number) << " out of " << limitNumber << " started on ";
-    std::cout << today << endl;
+    cout << today << endl;
 
     if (IsPrime(number))
     {
